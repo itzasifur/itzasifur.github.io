@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <title>MD Asifur Rahman | Programmer &amp; Performance Marketer</title>
+  <meta name="description" content="MD Asifur Rahman — programmer and performance marketer. Projects, skills, certifications and education.">
+  <link rel="icon" type="image/png" href="ava.png">
+  <link rel="apple-touch-icon" href="ava.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050505;
+      --card-bg: #111111;
+      --text: #f5f5f5;
+      --muted: #a0a0a0;
+      --accent: #53b2ff;
+      --border-subtle: #2a2a2a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #1f1f1f 0, #050505 42%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 32px 40px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 24px 80px rgba(0, 0, 0, .65);
+      overflow: hidden;
+    }
+
+    .header {
+      position: relative;
+      margin: -32px -32px 18px;
+      padding: 46px 32px 48px;
+      min-height: 248px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      overflow: hidden;
+      background: radial-gradient(ellipse 68% 92% at 68% 46%, rgba(16, 26, 20, .85) 0%, rgba(17, 17, 17, 0) 76%), var(--card-bg);
+    }
+
+    .header-cover {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0;
+      animation: cover-appear 900ms cubic-bezier(.22, 1, .36, 1) forwards;
+      /* Feathered alpha mask so the cover dissolves organically into #111111 with zero hard edge */
+      -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, .92) 0%, #000 14%, #000 66%, rgba(0, 0, 0, .42) 86%, transparent 100%);
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, .92) 0%, #000 14%, #000 66%, rgba(0, 0, 0, .42) 86%, transparent 100%);
+    }
+
+    .cover-lottie {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cover-lottie svg {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .cover-crt {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, .20) 3px,
+        rgba(0, 0, 0, .20) 4px
+      );
+      opacity: .42;
+      pointer-events: none;
+    }
+
+    .cover-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        /* Left-side editorial fade so avatar + name stay ultra-legible while eye breathes on the right */
+        linear-gradient(90deg, rgba(17, 17, 17, .96) 0%, rgba(17, 17, 17, .84) 30%, rgba(17, 17, 17, .42) 52%, rgba(17, 17, 17, .06) 72%, rgba(17, 17, 17, .24) 100%),
+        /* Seamless bottom melt into --card-bg (#111111) */
+        linear-gradient(180deg, rgba(17, 17, 17, .14) 0%, rgba(17, 17, 17, 0) 24%, rgba(17, 17, 17, 0) 58%, rgba(17, 17, 17, .68) 82%, #111111 100%);
+      pointer-events: none;
+    }
+
+    .avatar {
+      position: relative;
+      z-index: 2;
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: #191919;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .62), 0 0 0 1px rgba(0, 0, 0, .4);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      display: block;
+    }
+
+    .identity {
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
+
+    h1 {
+      font-size: 40px;
+      letter-spacing: .02em;
+      margin: 0 0 6px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-shadow: 0 2px 22px rgba(0, 0, 0, .75);
+    }
+
+    .subtitle {
+      color: #b8bfbb;
+      font-size: 15px;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, .85);
+    }
+
+    .location {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 3px;
+    }
+
+    .socials {
+      margin-top: 12px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .socials a {
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      color: #fff;
+      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, .72));
+    }
+
+    .socials svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .92;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .socials a:hover svg {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    section { margin-top: 32px; }
+    .header + section { margin-top: 12px; }
+
+    h2 {
+      font-size: 18px;
+      margin: 0 0 8px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    ul {
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    li > ul { margin-top: 4px; }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(83, 178, 255, .35);
+      padding-bottom: 1px;
+      transition: border-color .2s ease, color .2s ease;
+    }
+
+    a:hover { border-bottom-color: rgba(83, 178, 255, .9); }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    .email { font-weight: 500; }
+    .muted { color: var(--muted); }
+
+    .credential-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 8px 20px;
+    }
+
+    .filter-tab {
+      appearance: none;
+      border: 0;
+      border-bottom: 1px solid transparent;
+      border-radius: 0;
+      padding: 0 0 1px;
+      background: transparent;
+      color: var(--accent);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .filter-tab:hover { border-bottom-color: rgba(83, 178, 255, .9); }
+    .filter-tab[aria-pressed="true"] { color: var(--text); border-bottom-color: rgba(245, 245, 245, .55); }
+    [data-kind][hidden] { display: none; }
+
+    .copy-link {
+      appearance: none;
+      border: 0;
+      border-bottom: 1px solid rgba(83, 178, 255, .35);
+      padding: 0 0 1px;
+      margin-left: 8px;
+      background: transparent;
+      color: var(--accent);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .copy-link:hover { border-bottom-color: rgba(83, 178, 255, .9); }
+    .copy-link.copied { color: #a7e6b0; border-bottom-color: rgba(167, 230, 176, .5); }
+
+    .footwrap {
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px 24px;
+      flex-wrap: wrap;
+    }
+
+    .foot { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .foot-socials {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .foot-socials a {
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    .foot-socials svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: color .2s ease;
+    }
+
+    .foot-socials a:hover { color: #fff; }
+
+    @media (max-width: 600px) {
+      main { margin: 20px auto 48px; padding: 0 12px; }
+      .card { padding: 24px 20px 32px; }
+      .header {
+        margin: -24px -20px 14px;
+        padding: 30px 20px 36px;
+        min-height: 240px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .cover-scrim {
+        background:
+          linear-gradient(90deg, rgba(17, 17, 17, .62) 0%, rgba(17, 17, 17, .18) 55%, rgba(17, 17, 17, .28) 100%),
+          linear-gradient(180deg, rgba(17, 17, 17, .16) 0%, rgba(17, 17, 17, .36) 52%, rgba(17, 17, 17, .88) 84%, #111111 100%);
+      }
+      .avatar { width: 96px; height: 96px; }
+      h1 { font-size: 32px; }
+      .socials { gap: 18px; }
+      .footwrap { align-items: flex-start; }
+    }
+
+    /* Typewriter entrance */
+    .identity h1 {
+      display: inline-block;
+      max-width: 100%;
+      margin-right: 2px;
+    }
+
+    .identity h1.typing::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: .88em;
+      margin-left: 4px;
+      vertical-align: -.06em;
+      background: currentColor;
+      border-radius: 2px;
+      animation: caret-blink 1.05s ease-in-out infinite;
+    }
+
+    @keyframes caret-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .18; }
+    }
+
+    @keyframes cover-appear {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .avatar,
+    .subtitle,
+    .socials,
+    .card > section,
+    .footwrap {
+      opacity: 0;
+      animation: soft-appear 650ms ease-out forwards;
+    }
+
+    .avatar { animation-delay: 100ms; }
+    .subtitle { animation-delay: 1.35s; }
+    .socials { animation-delay: 1.5s; }
+    .card > section:nth-of-type(1) { animation-delay: 1.65s; }
+    .card > section:nth-of-type(2) { animation-delay: 1.75s; }
+    .card > section:nth-of-type(3) { animation-delay: 1.85s; }
+    .card > section:nth-of-type(4) { animation-delay: 1.95s; }
+    .card > section:nth-of-type(5) { animation-delay: 2.05s; }
+    .card > section:nth-of-type(6) { animation-delay: 2.15s; }
+    .card > section:nth-of-type(7) { animation-delay: 2.25s; }
+    .card > section:nth-of-type(8) { animation-delay: 2.35s; }
+    .footwrap { animation-delay: 2.45s; }
+
+    @keyframes soft-appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+      }
+      .header-cover, .avatar, .subtitle, .socials, .card > section, .footwrap {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .identity h1.typing::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="card">
+      <header class="header">
+        <div class="header-cover" aria-hidden="true">
+          <div id="cover-lottie" class="cover-lottie"></div>
+          <div class="cover-crt"></div>
+        </div>
+        <div class="cover-scrim" aria-hidden="true"></div>
+        <div class="avatar">
+          <img src="vect.png" alt="MD Asifur Rahman" width="120" height="120" decoding="async" onerror="this.style.display='none'">
+        </div>
+        <div class="identity">
+          <h1>MD Asifur Rahman</h1>
+          <div class="subtitle">Programmer | @itzasifur</div>
+          <nav class="socials" aria-label="Social profiles">
+            <a href="https://itzasifur.wuaze.com/" target="_blank" rel="noopener noreferrer" aria-label="Website">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </a>
+            <a href="https://github.com/itzasifur" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.1-1.5 6.1-6.8a5.3 5.3 0 0 0-1.4-3.7 4.9 4.9 0 0 0-.1-3.7S17.5 1 14 3.3a13.4 13.4 0 0 0-7 0C3.5 1 2.3 1.2 2.3 1.2a4.9 4.9 0 0 0-.1 3.7A5.3 5.3 0 0 0 .8 8.6c0 5.3 3.1 6.5 6.1 6.8a3.4 3.4 0 0 0-.9 2.7V22"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/md-asifur-rahman-484197444/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.facebook.com/itzasifur" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/itzasifur/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+            </a>
+            <a href="https://www.credly.com/badges/12d28abc-a55b-45a7-8d60-9f114044c125" target="_blank" rel="noopener noreferrer" aria-label="Ethical Hacker">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2-2 2"/><line x1="13" y1="15" x2="15" y2="15"/></svg>
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <section>
+        <h2>Overview</h2>
+        <ul>
+          <li>Programmer and performance marketer based in Cumilla, Bangladesh.</li>
+          <li><strong>11+ verified learning credentials</strong>, including Cisco Networking Academy, Google Ads, freeCodeCamp and English proficiency.</li>
+          <li><strong>C2 English proficiency</strong>, verified by EF SET. <a href="https://cert.efset.org/NpBZ1s" target="_blank" rel="noopener noreferrer">View certificate</a>.</li>
+          <li>Three personal projects: SWIPE, Kibolbo and Cozy Writer.</li>
+          <li>Four core areas of campaign and account work.</li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+          <li><strong>SWIPE · Universal File Transfer</strong> <span class="muted">(In development)</span>
+            <ul>
+              <li>Android · Kotlin · Local HTTP · Cross-device browser sharing.</li>
+              <li>Share files between phones and computers on the same network.</li>
+            </ul>
+          </li>
+          <li><strong><a href="https://kibolbo.web.app/" target="_blank" rel="noopener noreferrer">Kibolbo · Browser Chat</a></strong>
+            <ul>
+              <li>Web development · JavaScript · Firebase hosting.</li>
+              <li>A simple chat website that runs in the browser.</li>
+            </ul>
+          </li>
+          <li><strong><a href="https://cozywriter.freedev.app/" target="_blank" rel="noopener noreferrer">Cozy Writer · Browser Writing App</a></strong>
+            <ul>
+              <li>Web development · Minimalist text editor.</li>
+              <li>A clean, distraction-free writing website that runs in the browser.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Performance marketing</h2>
+        <ul>
+          <li><strong>Google Ads</strong>
+            <ul><li>Search, Display, keyword research, bidding and measurement.</li></ul>
+          </li>
+          <li><strong>Meta Ads</strong>
+            <ul><li>Audience targeting, creative testing and lead generation.</li></ul>
+          </li>
+          <li><strong>Client communication</strong>
+            <ul><li>Account coordination, expectation management and service delivery.</li></ul>
+          </li>
+          <li><strong>Excel &amp; reporting</strong>
+            <ul><li>Spreadsheet organisation, formulas and KPI tracking.</li></ul>
+          </li>
+        </ul>
+      </section>
+
+      <section id="credentials">
+        <h2>Credentials &amp; learning</h2>
+        <div class="credential-filters" role="group" aria-label="Filter credentials">
+          <button class="filter-tab" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-tab" type="button" data-filter="cisco" aria-pressed="false">Cisco</button>
+          <button class="filter-tab" type="button" data-filter="google" aria-pressed="false">Google</button>
+          <button class="filter-tab" type="button" data-filter="fcc" aria-pressed="false">freeCodeCamp</button>
+        </div>
+        <ul class="credential-list">
+          <li data-kind="cisco"><strong>Ethical Hacker</strong> · Cisco Networking Academy · Cybersecurity &amp; penetration testing. <a href="https://www.credly.com/badges/12d28abc-a55b-45a7-8d60-9f114044c125" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="cisco"><strong>Networking Basics</strong> · Cisco Networking Academy · Network fundamentals. <a href="https://www.credly.com/badges/4289264a-f687-438f-ab59-2001fb471bc8" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="google"><strong>Google Ads Search</strong> · Google Skillshop · Search certification. <a href="https://skillshop.credential.net/dedfed89-f35d-496f-9d02-f0ba78392e82" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="google"><strong>Google Ads Measurement</strong> · Google Skillshop · Measurement. <a href="https://skillshop.credential.net/23d1a0a8-df67-4e19-ba33-bc449a49f19c" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="google"><strong>Google Ads Display</strong> · Google Skillshop · Display certification. <a href="https://skillshop.credential.net/1d882163-d59f-441d-ae13-1e1016e521a3" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="fcc"><strong>Python &amp; JavaScript</strong> · freeCodeCamp · Programming. <a href="https://freecodecamp.org/certification/itzasifur/python-v9" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="fcc"><strong>Front-End Libraries</strong> · freeCodeCamp · React and more. <a href="https://freecodecamp.org/certification/itzasifur/front-end-development-libraries-v9" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="fcc"><strong>Responsive Design</strong> · freeCodeCamp · HTML &amp; CSS. <a href="https://freecodecamp.org/certification/itzasifur/responsive-web-design-v9" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="fcc"><strong>Relational Databases</strong> · freeCodeCamp · SQL. <a href="https://freecodecamp.org/certification/itzasifur/relational-databases-v9" target="_blank" rel="noopener noreferrer">Verify</a></li>
+          <li data-kind="fcc"><strong>Back-End &amp; APIs</strong> · freeCodeCamp · Node &amp; Express. <a href="https://freecodecamp.org/certification/itzasifur/back-end-development-and-apis-v9" target="_blank" rel="noopener noreferrer">Verify</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Activity</h2>
+        <ul>
+          <li><strong>SWIPE</strong> <span class="muted">· In progress</span> — Share files between phones and computers on the same network. <a href="#projects">View project</a>.</li>
+          <li><strong>Kibolbo</strong> <span class="muted">· Live</span> — A simple chat website that runs in the browser. <a href="https://kibolbo.web.app/" target="_blank" rel="noopener noreferrer">Open site</a>.</li>
+          <li><strong>Cozy Writer</strong> <span class="muted">· Live</span> — A clean, distraction-free writing website that runs in the browser. <a href="https://cozywriter.freedev.app/" target="_blank" rel="noopener noreferrer">Open site</a>.</li>
+          <li><strong>Cisco Networking Academy</strong> <span class="muted">· Verified</span> — Ethical Hacker and Networking Basics via Credly. <a href="#credentials">View credentials</a>.</li>
+          <li><strong>Google Skillshop</strong> <span class="muted">· Verified</span> — Google Ads Search, Measurement and Display. <a href="#credentials">View credentials</a>.</li>
+          <li><strong>freeCodeCamp</strong> <span class="muted">· Verified</span> — Python, JavaScript, front-end, databases and APIs. <a href="#credentials">View credentials</a>.</li>
+          <li><strong>English</strong> <span class="muted">· EF SET</span> — C2 proficiency, verified by EF SET. <a href="https://cert.efset.org/NpBZ1s" target="_blank" rel="noopener noreferrer">View certificate</a>.</li>
+          <li><strong>About</strong> <span class="muted">· Profile</span> — Based in Cumilla. Interested in software and digital marketing. <a href="mailto:itzasifur@gmail.com">Say hello</a>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Skills &amp; tools</h2>
+        <ul>
+          <li>JavaScript, Python, React, HTML, CSS, SQL, Kotlin and Node.js.</li>
+          <li>Ethical hacking, penetration testing and networking fundamentals.</li>
+          <li>Google Ads and Meta Ads.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Get in touch</h2>
+        <ul>
+          <li>Have a project, collaboration or opportunity in mind? Send a message.</li>
+          <li>My email is <a class="email" href="mailto:itzasifur@gmail.com">itzasifur@gmail.com</a><button class="copy-link" type="button" id="copy-email">Copy email</button></li>
+          <li>My professional website is <a class="email" href="https://itzasifur.wuaze.com/" target="_blank" rel="noopener noreferrer">itzasifur.wuaze.com</a></li>
+        </ul>
+      </section>
+
+      <footer class="footwrap">
+        <p class="foot">Based in Cumilla, working with teams anywhere.</p>
+        <nav class="foot-socials" aria-label="Social profiles">
+          <a href="https://itzasifur.wuaze.com/" target="_blank" rel="noopener noreferrer" aria-label="Website"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+          <a href="https://github.com/itzasifur" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.1-1.5 6.1-6.8a5.3 5.3 0 0 0-1.4-3.7 4.9 4.9 0 0 0-.1-3.7S17.5 1 14 3.3a13.4 13.4 0 0 0-7 0C3.5 1 2.3 1.2 2.3 1.2a4.9 4.9 0 0 0-.1 3.7A5.3 5.3 0 0 0 .8 8.6c0 5.3 3.1 6.5 6.1 6.8a3.4 3.4 0 0 0-.9 2.7V22"/></svg></a>
+          <a href="https://www.linkedin.com/in/md-asifur-rahman-484197444/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://www.facebook.com/itzasifur" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/itzasifur/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+          <a href="https://www.credly.com/badges/12d28abc-a55b-45a7-8d60-9f114044c125" target="_blank" rel="noopener noreferrer" aria-label="Ethical Hacker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2-2 2"/><line x1="13" y1="15" x2="15" y2="15"/></svg></a>
+        </nav>
+      </footer>
+    </article>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    (() => {
+      const coverContainer = document.getElementById('cover-lottie');
+      if (!coverContainer || typeof lottie === 'undefined') return;
+
+      const coverAnimationData = {"v":"5.12.2","fr":60,"ip":0,"op":360,"w":1280,"h":380,"nm":"Biometric Eye Banner Cover","ddd":0,"assets":[],"fonts":{"list":[{"fName":"CourierNewPSMT","fFamily":"Courier New","fStyle":"Regular","ascent":75}]},"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"Top-Right HUD Widget","sr":1,"ks":{"o":{"a":0,"k":72},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"HUD Box","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[112,42]},"p":{"a":0,"k":[1192,44]},"r":{"a":0,"k":2}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[1136.0,44.0],[1248.0,44.0]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[1176.0,23.0],[1176.0,65.0]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[1216.0,23.0],[1216.0,65.0]],"c":false}}},{"ty":"st","c":{"a":0,"k":[0.282,0.678,0.412,1]},"o":{"a":0,"k":78},"w":{"a":0,"k":1.3},"lc":1,"lj":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"HUD Bars","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[24,3]},"p":{"a":0,"k":[1154,31]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[16,3]},"p":{"a":0,"k":[1150,37]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[26,3]},"p":{"a":0,"k":[1195,31]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[22,3]},"p":{"a":0,"k":[1153,54]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[24,3]},"p":{"a":0,"k":[1194,57]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.282,0.678,0.412,1]},"o":{"a":0,"k":55},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"HUD Active Beacon","sr":1,"ks":{"o":{"a":1,"k":[{"t":0,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":26,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":32,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":56,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":62,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":112,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":118,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":144,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":150,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":205,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":211,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":238,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":244,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":305,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":311,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":340,"s":[12],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":346,"s":[88],"i":{"x":[0.5],"y":[1]},"o":{"x":[0.5],"y":[0]}},{"t":360,"s":[88]}]},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"Beacon","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[18,9]},"p":{"a":0,"k":[1232,34]},"r":{"a":0,"k":1}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":0,"k":90},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":3,"ty":5,"nm":"x86 Assembly Telemetry","sr":1,"ks":{"o":{"a":1,"k":[{"t":0,"s":[46],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":180,"s":[58],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[46]}]},"r":{"a":0,"k":0},"p":{"a":1,"k":[{"t":0,"s":[1248,86,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":180,"s":[1248,76,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":360,"s":[1248,86,0]}]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"t":{"d":{"k":[{"s":{"s":11,"f":"CourierNewPSMT","t":"CenterScreen proc hWnd\rLOCAL DlgHeight:DWORD\rLOCAL DlgWidth:DWORD\rLOCAL DlgRect:RECT\r\rinvoke GetWindowRect\rinvoke GetDesktopWnd\rmov ecx, eax\rpush 0\rmov eax, DlgRect.bot\rsub eax, DlgRect.top\rmov DlgHeight, eax\rmov eax, DlgRect.rgt\rsub eax, DlgRect.lft\rshr eax, 1\rpush hWnd\rcall MoveWindow\rret","j":1,"tr":12,"lh":15.5,"ls":0,"fc":[0.38,0.74,0.48]},"t":0}]},"p":{},"m":{"g":1,"a":{"a":0,"k":[0,0]}},"a":[]},"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":4,"ty":4,"nm":"Biometric Laser Scanline","sr":1,"ks":{"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":24,"s":[78],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":156,"s":[78],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":180,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":195,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":218,"s":[62],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":336,"s":[62],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":{"a":0,"k":0},"p":{"a":1,"k":[{"t":0,"s":[846.0,88.0,0],"i":{"x":0.75,"y":1},"o":{"x":0.25,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":180,"s":[846.0,263.3,0],"i":{"x":0.75,"y":1},"o":{"x":0.25,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":195,"s":[846.0,263.3,0],"i":{"x":0.75,"y":1},"o":{"x":0.25,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":360,"s":[846.0,88.0,0]}]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"Laser Glow","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[380,28]},"p":{"a":0,"k":[0,-10]},"r":{"a":0,"k":0}},{"ty":"gf","o":{"a":0,"k":100},"r":1,"bm":0,"g":{"p":2,"k":{"a":0,"k":[0,0.35,0.92,0.52,1,0.25,0.75,0.4,0,0.0,1,0.28]}},"s":{"a":0,"k":[0,-24]},"e":{"a":0,"k":[0,4]},"t":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"Laser Core","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[380,1.6]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.56,1.0,0.68,1]},"o":{"a":0,"k":88},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":5,"ty":4,"nm":"Biometric Tracking Grid","sr":1,"ks":{"o":{"a":1,"k":[{"t":0,"s":[82],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":90,"s":[94],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":180,"s":[78],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":270,"s":[94],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[82]}]},"r":{"a":0,"k":0},"p":{"a":1,"k":[{"t":0,"s":[847.2,175.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":58,"s":[847.2,175.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":78,"s":[854.2,172.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":144,"s":[854.2,172.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":164,"s":[842.7,177.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":230,"s":[842.7,177.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":250,"s":[850.7,174.0,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":312,"s":[850.7,174.0,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":332,"s":[847.2,175.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":360,"s":[847.2,175.5,0]}]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"Mesh","it":[{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-89.1,-91.5],[134.2,-91.5]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-126.3,-71.1],[171.4,-71.1]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,-50.8],[22.5,-50.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[97.0,-50.8],[171.4,-50.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,-30.4],[22.5,-30.4]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[97.0,-30.4],[171.4,-30.4]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,-10.0],[22.5,-10.0]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[134.2,-10.0],[171.4,-10.0]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,10.4],[22.5,10.4]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[134.2,10.4],[208.6,10.4]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,30.7],[22.5,30.7]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[134.2,30.7],[208.6,30.7]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,51.1],[22.5,51.1]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[97.0,51.1],[171.4,51.1]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,71.5],[171.4,71.5]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,91.8],[171.4,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-163.5,-50.8],[-163.5,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-126.3,-71.1],[-126.3,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-89.1,-91.5],[-89.1,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-51.9,-91.5],[-51.9,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[-14.7,-91.5],[-14.7,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[22.5,-91.5],[22.5,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[59.8,-91.5],[59.8,-71.1]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[59.8,71.5],[59.8,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[97.0,-91.5],[97.0,-30.4]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[97.0,51.1],[97.0,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[134.2,-91.5],[134.2,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[171.4,-71.1],[171.4,91.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0]],"o":[[0,0],[0,0]],"v":[[208.6,10.4],[208.6,30.7]],"c":false}}},{"ty":"st","c":{"a":0,"k":[0.282,0.678,0.412,1]},"o":{"a":0,"k":76},"w":{"a":0,"k":1.6},"lc":1,"lj":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":6,"ty":4,"nm":"Active Grid Sectors","sr":1,"ks":{"o":{"a":0,"k":100},"r":{"a":0,"k":0},"p":{"a":1,"k":[{"t":0,"s":[847.2,175.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":58,"s":[847.2,175.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":78,"s":[854.2,172.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":144,"s":[854.2,172.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":164,"s":[842.7,177.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":230,"s":[842.7,177.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":250,"s":[850.7,174.0,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":312,"s":[850.7,174.0,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":332,"s":[847.2,175.5,0],"i":{"x":0.65,"y":1},"o":{"x":0.35,"y":0},"to":[0,0,0],"ti":[0,0,0]},{"t":360,"s":[847.2,175.5,0]}]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"S1","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[34.2,17.4]},"p":{"a":0,"k":[-70.5,-40.6]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":22,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":48,"s":[24],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":82,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"S2","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[34.2,17.4]},"p":{"a":0,"k":[-33.3,0.2]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":70,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":96,"s":[24],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":130,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"S3","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[34.2,17.4]},"p":{"a":0,"k":[190.0,20.5]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":112,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":138,"s":[24],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":172,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"S4","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[34.2,17.4]},"p":{"a":0,"k":[-70.5,40.9]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":162,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":188,"s":[24],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":222,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"S5","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[34.2,17.4]},"p":{"a":0,"k":[-107.7,-20.2]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":214,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":240,"s":[24],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":274,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"S6","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[34.2,17.4]},"p":{"a":0,"k":[3.9,61.3]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.44,0.86,0.56,1]},"o":{"a":1,"k":[{"t":0,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":270,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":296,"s":[24],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":330,"s":[0],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[0]}]},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":7,"ty":4,"nm":"Eye Rim Shadow Vignette","sr":1,"ks":{"o":{"a":0,"k":100},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"hasMask":true,"masksProperties":[{"inv":false,"mode":"a","pt":{"a":0,"k":{"i":[[-0.0,13.9],[-8.3,14.3],[-13.1,12.0],[-16.8,7.7],[-19.5,2.7],[-19.1,-3.1],[-15.5,-8.9],[-10.6,-13.7],[-5.2,-14.7],[2.3,-13.5],[10.0,-11.4],[15.6,-7.5],[18.9,-3.5],[19.5,1.2],[18.4,5.2],[14.7,8.1],[8.7,11.2]],"o":[[0.0,-13.9],[8.3,-14.3],[13.1,-12.0],[16.8,-7.7],[19.5,-2.7],[19.1,3.1],[15.5,8.9],[10.6,13.7],[5.2,14.7],[-2.3,13.5],[-10.0,11.4],[-15.6,7.5],[-18.9,3.5],[-19.5,-1.2],[-18.4,-5.2],[-14.7,-8.1],[-8.7,-11.2]],"v":[[669.1,209.1],[686.2,162.7],[721.6,118.8],[769.1,87.1],[827.7,70.0],[892.4,70.0],[948.5,89.5],[990.0,126.1],[1015.6,176.1],[1022.9,218.8],[1000.9,261.5],[959.5,290.8],[902.1,309.1],[839.9,312.8],[778.9,301.8],[724.0,279.8],[686.2,250.6]],"c":true}},"o":{"a":0,"k":100},"x":{"a":0,"k":0},"nm":"Eye Mask"}],"shapes":[{"ty":"gr","nm":"Inner Lid Rim","it":[{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[-0.0,13.9],[-8.3,14.3],[-13.1,12.0],[-16.8,7.7],[-19.5,2.7],[-19.1,-3.1],[-15.5,-8.9],[-10.6,-13.7],[-5.2,-14.7],[2.3,-13.5],[10.0,-11.4],[15.6,-7.5],[18.9,-3.5],[19.5,1.2],[18.4,5.2],[14.7,8.1],[8.7,11.2]],"o":[[0.0,-13.9],[8.3,-14.3],[13.1,-12.0],[16.8,-7.7],[19.5,-2.7],[19.1,3.1],[15.5,8.9],[10.6,13.7],[5.2,14.7],[-2.3,13.5],[-10.0,11.4],[-15.6,7.5],[-18.9,3.5],[-19.5,-1.2],[-18.4,-5.2],[-14.7,-8.1],[-8.7,-11.2]],"v":[[669.1,209.1],[686.2,162.7],[721.6,118.8],[769.1,87.1],[827.7,70.0],[892.4,70.0],[948.5,89.5],[990.0,126.1],[1015.6,176.1],[1022.9,218.8],[1000.9,261.5],[959.5,290.8],[902.1,309.1],[839.9,312.8],[778.9,301.8],[724.0,279.8],[686.2,250.6]],"c":true}}},{"ty":"st","c":{"a":0,"k":[0.055,0.062,0.058,1]},"o":{"a":0,"k":92},"w":{"a":0,"k":26},"lc":2,"lj":2},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ef":[{"ty":29,"nm":"Rim Soft Blur","np":5,"mn":"ADBE Gaussian Blur 2","ix":1,"en":1,"ef":[{"ty":0,"nm":"Blurriness","mn":"ADBE Gaussian Blur 2-0001","ix":1,"v":{"a":0,"k":18}},{"ty":7,"nm":"Blur Dimensions","mn":"ADBE Gaussian Blur 2-0002","ix":2,"v":{"a":0,"k":1}},{"ty":7,"nm":"Repeat Edge Pixels","mn":"ADBE Gaussian Blur 2-0003","ix":3,"v":{"a":0,"k":1}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":8,"ty":4,"nm":"Eyelid Blink Curtain","sr":1,"ks":{"o":{"a":0,"k":100},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"hasMask":true,"masksProperties":[{"inv":false,"mode":"a","pt":{"a":0,"k":{"i":[[-0.0,13.9],[-8.3,14.3],[-13.1,12.0],[-16.8,7.7],[-19.5,2.7],[-19.1,-3.1],[-15.5,-8.9],[-10.6,-13.7],[-5.2,-14.7],[2.3,-13.5],[10.0,-11.4],[15.6,-7.5],[18.9,-3.5],[19.5,1.2],[18.4,5.2],[14.7,8.1],[8.7,11.2]],"o":[[0.0,-13.9],[8.3,-14.3],[13.1,-12.0],[16.8,-7.7],[19.5,-2.7],[19.1,3.1],[15.5,8.9],[10.6,13.7],[5.2,14.7],[-2.3,13.5],[-10.0,11.4],[-15.6,7.5],[-18.9,3.5],[-19.5,-1.2],[-18.4,-5.2],[-14.7,-8.1],[-8.7,-11.2]],"v":[[669.1,209.1],[686.2,162.7],[721.6,118.8],[769.1,87.1],[827.7,70.0],[892.4,70.0],[948.5,89.5],[990.0,126.1],[1015.6,176.1],[1022.9,218.8],[1000.9,261.5],[959.5,290.8],[902.1,309.1],[839.9,312.8],[778.9,301.8],[724.0,279.8],[686.2,250.6]],"c":true}},"o":{"a":0,"k":100},"x":{"a":0,"k":0},"nm":"Eye Mask"}],"shapes":[{"ty":"gr","nm":"Upper Eyelid","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[440,290]},"p":{"a":0,"k":[846.0,-86]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.055,0.063,0.059,1]},"o":{"a":0,"k":98},"r":1},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100},"p":{"a":1,"k":[{"t":0,"s":[0,0],"i":{"x":[0.65,0.65],"y":[1,1]},"o":{"x":[0.35,0.35],"y":[0,0]}},{"t":258,"s":[0,0],"i":{"x":[0.65,0.65],"y":[1,1]},"o":{"x":[0.35,0.35],"y":[0,0]}},{"t":268,"s":[0,280],"i":{"x":[0.65,0.65],"y":[1,1]},"o":{"x":[0.35,0.35],"y":[0,0]}},{"t":279,"s":[0,0],"i":{"x":[0.65,0.65],"y":[1,1]},"o":{"x":[0.35,0.35],"y":[0,0]}},{"t":360,"s":[0,0]}]}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":9,"ty":4,"nm":"Animated Halftone Iris & Pupil","sr":1,"ks":{"o":{"a":0,"k":100},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"hasMask":true,"masksProperties":[{"inv":false,"mode":"a","pt":{"a":0,"k":{"i":[[-0.0,13.9],[-8.3,14.3],[-13.1,12.0],[-16.8,7.7],[-19.5,2.7],[-19.1,-3.1],[-15.5,-8.9],[-10.6,-13.7],[-5.2,-14.7],[2.3,-13.5],[10.0,-11.4],[15.6,-7.5],[18.9,-3.5],[19.5,1.2],[18.4,5.2],[14.7,8.1],[8.7,11.2]],"o":[[0.0,-13.9],[8.3,-14.3],[13.1,-12.0],[16.8,-7.7],[19.5,-2.7],[19.1,3.1],[15.5,8.9],[10.6,13.7],[5.2,14.7],[-2.3,13.5],[-10.0,11.4],[-15.6,7.5],[-18.9,3.5],[-19.5,-1.2],[-18.4,-5.2],[-14.7,-8.1],[-8.7,-11.2]],"v":[[669.1,209.1],[686.2,162.7],[721.6,118.8],[769.1,87.1],[827.7,70.0],[892.4,70.0],[948.5,89.5],[990.0,126.1],[1015.6,176.1],[1022.9,218.8],[1000.9,261.5],[959.5,290.8],[902.1,309.1],[839.9,312.8],[778.9,301.8],[724.0,279.8],[686.2,250.6]],"c":true}},"o":{"a":0,"k":100},"x":{"a":0,"k":0},"nm":"Eye Mask"}],"shapes":[{"ty":"gr","nm":"Iris Assembly","it":[{"ty":"gr","nm":"Specular","it":[{"ty":"el","d":1,"s":{"a":0,"k":[40,28]},"p":{"a":0,"k":[-22,-23]}},{"ty":"el","d":1,"s":{"a":0,"k":[17,16]},"p":{"a":0,"k":[-13,11]}},{"ty":"fl","c":{"a":0,"k":[0.89,0.92,0.905,1]},"o":{"a":0,"k":90},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":12},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"Pupil","it":[{"ty":"el","d":1,"s":{"a":0,"k":[64,64]},"p":{"a":0,"k":[0,0]}},{"ty":"fl","c":{"a":0,"k":[0.025,0.03,0.028,1]},"o":{"a":0,"k":100},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"o":{"a":0,"k":100},"s":{"a":1,"k":[{"t":0,"s":[100,100],"i":{"x":[0.6,0.6],"y":[1,1]},"o":{"x":[0.4,0.4],"y":[0,0]}},{"t":75,"s":[104,104],"i":{"x":[0.6,0.6],"y":[1,1]},"o":{"x":[0.4,0.4],"y":[0,0]}},{"t":112,"s":[80,80],"i":{"x":[0.6,0.6],"y":[1,1]},"o":{"x":[0.4,0.4],"y":[0,0]}},{"t":175,"s":[102,102],"i":{"x":[0.6,0.6],"y":[1,1]},"o":{"x":[0.4,0.4],"y":[0,0]}},{"t":268,"s":[88,88],"i":{"x":[0.6,0.6],"y":[1,1]},"o":{"x":[0.4,0.4],"y":[0,0]}},{"t":360,"s":[100,100]}]}}]},{"ty":"gr","nm":"Iris Dots Bright","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[23,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-43,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-10,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[12,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[23,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[34,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[34,-32]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,-32]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-54,-21]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,-21]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[56,-21]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-54,-10]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-43,-10]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,-10]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[56,-10]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-43,1]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,1]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[56,1]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-54,12]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-43,12]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,12]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[56,12]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,23]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[56,23]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-32,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-21,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[23,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[34,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[45,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-21,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-10,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[12,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-21,56]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[-10,56]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[1,56]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[12,56]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[6,6]},"p":{"a":0,"k":[23,56]},"r":{"a":0,"k":1}},{"ty":"fl","c":{"a":0,"k":[0.86,0.9,0.88,1]},"o":{"a":0,"k":88},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"Iris Dots Mid","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1,-65]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[12,-65]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-43,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-32,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-21,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-10,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[12,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[34,-54]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-54,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[45,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[56,-43]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-54,-32]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[56,-32]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[34,-21]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[67,-21]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-65,1]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-54,1]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[67,1]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[67,12]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-43,23]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-32,23]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[34,23]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-54,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-10,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[12,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[56,34]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-32,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[23,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[34,45]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[-32,56]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[34,56]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1,67]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[12,67]},"r":{"a":0,"k":1}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[23,67]},"r":{"a":0,"k":1}},{"ty":"fl","c":{"a":0,"k":[0.5,0.55,0.525,1]},"o":{"a":0,"k":76},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"Iris Base","it":[{"ty":"el","d":1,"s":{"a":0,"k":[178.2,178.2]},"p":{"a":0,"k":[0,0]}},{"ty":"gf","o":{"a":0,"k":100},"r":1,"bm":0,"g":{"p":3,"k":{"a":0,"k":[0,0.03,0.036,0.033,0.72,0.105,0.12,0.112,1,0.04,0.048,0.044]}},"s":{"a":0,"k":[0,0]},"e":{"a":0,"k":[89.1,0]},"t":2,"h":{"a":0,"k":0},"a":{"a":0,"k":0}},{"ty":"st","c":{"a":0,"k":[0.06,0.072,0.066,1]},"o":{"a":0,"k":85},"w":{"a":0,"k":4},"lc":2,"lj":2},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100},"p":{"a":1,"k":[{"t":0,"s":[797.2,200.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":52,"s":[797.2,200.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":70,"s":[811.2,194.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":138,"s":[811.2,194.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":156,"s":[788.2,204.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":224,"s":[788.2,204.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":244,"s":[804.2,197.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":306,"s":[804.2,197.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":326,"s":[797.2,200.5],"i":{"x":[0.82,0.82],"y":[1,1]},"o":{"x":[0.18,0.18],"y":[0,0]}},{"t":360,"s":[797.2,200.5]}]}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":10,"ty":4,"nm":"Monochrome Sclera & Delicate Veins","sr":1,"ks":{"o":{"a":0,"k":100},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"Capillaries","it":[{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[6.0,-0.6],[5.8,-0.6],[5.5,-0.7],[2.6,0.4]],"o":[[-3.0,1.1],[-6.0,0.6],[-5.8,0.6],[-5.5,0.7],[0,0]],"v":[[1002.8,143.2],[982.6,150.5],[963.1,146.9],[943.6,154.2],[926.5,151.7]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[6.4,0.4],[6.0,-0.2],[2.9,-1.1]],"o":[[-3.4,0.6],[-6.4,-0.4],[-6.0,0.2],[0,0]],"v":[[1013.1,185.9],[990.6,189.6],[970.4,183.5],[950.9,190.8]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[6.0,-0.5],[5.5,-0.7],[2.7,0.4]],"o":[[-3.3,-0.6],[-6.0,0.5],[-5.5,0.7],[0,0]],"v":[[997.3,227.4],[975.3,223.7],[957.0,231.0],[938.7,228.6]],"c":false}}},{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[0,0],[3.9,-2.7],[2.1,-0.7]],"o":[[-1.8,2.0],[-3.9,2.7],[0,0]],"v":[[974.1,113.9],[961.9,127.3],[947.9,132.2]],"c":false}}},{"ty":"st","c":{"a":0,"k":[0.12,0.14,0.13,1]},"o":{"a":0,"k":36},"w":{"a":0,"k":1.25},"lc":2,"lj":2},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"Sclera","it":[{"ty":"sh","d":1,"ks":{"a":0,"k":{"i":[[-0.0,13.9],[-8.3,14.3],[-13.1,12.0],[-16.8,7.7],[-19.5,2.7],[-19.1,-3.1],[-15.5,-8.9],[-10.6,-13.7],[-5.2,-14.7],[2.3,-13.5],[10.0,-11.4],[15.6,-7.5],[18.9,-3.5],[19.5,1.2],[18.4,5.2],[14.7,8.1],[8.7,11.2]],"o":[[0.0,-13.9],[8.3,-14.3],[13.1,-12.0],[16.8,-7.7],[19.5,-2.7],[19.1,3.1],[15.5,8.9],[10.6,13.7],[5.2,14.7],[-2.3,13.5],[-10.0,11.4],[-15.6,7.5],[-18.9,3.5],[-19.5,-1.2],[-18.4,-5.2],[-14.7,-8.1],[-8.7,-11.2]],"v":[[669.1,209.1],[686.2,162.7],[721.6,118.8],[769.1,87.1],[827.7,70.0],[892.4,70.0],[948.5,89.5],[990.0,126.1],[1015.6,176.1],[1022.9,218.8],[1000.9,261.5],[959.5,290.8],[902.1,309.1],[839.9,312.8],[778.9,301.8],[724.0,279.8],[686.2,250.6]],"c":true}}},{"ty":"gf","o":{"a":0,"k":100},"r":1,"bm":0,"g":{"p":3,"k":{"a":0,"k":[0,0.72,0.745,0.732,0.62,0.48,0.505,0.492,1,0.085,0.095,0.09]}},"s":{"a":0,"k":[871.6,170.0]},"e":{"a":0,"k":[1047.3,196.9]},"t":2,"h":{"a":0,"k":0},"a":{"a":0,"k":0}},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":11,"ty":4,"nm":"Orbital Halftone Stippling","sr":1,"ks":{"o":{"a":1,"k":[{"t":0,"s":[86],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":180,"s":[100],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[86]}]},"r":{"a":0,"k":0},"p":{"a":0,"k":[0,0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"Orbital Mid","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[850,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[872,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[916,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1114,160]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[652,204]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1114,204]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[674,248]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[1026,248]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[630,270]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[674,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[718,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[696,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[762,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[784,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[828,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[4.5,4.5]},"p":{"a":0,"k":[872,336]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.34,0.37,0.355,1]},"o":{"a":0,"k":60},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]},{"ty":"gr","nm":"Orbital Dim","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[696,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[828,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[894,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[916,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[938,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1048,28]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[762,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[784,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[828,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[850,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[872,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[916,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[960,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1026,50]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[608,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[718,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[740,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1004,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1026,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1136,72]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[542,94]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[696,94]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[982,94]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1070,94]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1114,94]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[674,116]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1004,116]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,138]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[674,138]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1026,138]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[520,160]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[630,160]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,160]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1136,160]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[630,182]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,182]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1048,182]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[608,204]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[630,204]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1136,204]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[542,226]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[586,226]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1048,226]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[520,248]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[564,248]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,248]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[586,270]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[674,270]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1004,270]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[564,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[608,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[630,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[696,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1136,292]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[586,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[630,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[674,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[718,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[740,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[762,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1026,314]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[608,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[652,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[674,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[696,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[718,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[740,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[806,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[850,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[894,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[916,336]},"r":{"a":0,"k":0}},{"ty":"rc","d":1,"s":{"a":0,"k":[3.5,3.5]},"p":{"a":0,"k":[1092,336]},"r":{"a":0,"k":0}},{"ty":"fl","c":{"a":0,"k":[0.22,0.25,0.235,1]},"o":{"a":0,"k":48},"r":1},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0},{"ddd":0,"ind":12,"ty":4,"nm":"Ambient Phosphor Aura","sr":1,"ks":{"o":{"a":1,"k":[{"t":0,"s":[75],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":180,"s":[100],"i":{"x":[0.58],"y":[1]},"o":{"x":[0.42],"y":[0]}},{"t":360,"s":[75]}]},"r":{"a":0,"k":0},"p":{"a":0,"k":[846.0,192.0,0]},"a":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]}},"ao":0,"shapes":[{"ty":"gr","nm":"Aura","it":[{"ty":"el","d":1,"s":{"a":0,"k":[640,360]},"p":{"a":0,"k":[0,0]}},{"ty":"gf","o":{"a":0,"k":100},"r":1,"bm":0,"g":{"p":2,"k":{"a":0,"k":[0,0.14,0.34,0.2,1,0.067,0.067,0.067,0,0.24,1,0.0]}},"s":{"a":0,"k":[0,0]},"e":{"a":0,"k":[320,0]},"t":2,"h":{"a":0,"k":0},"a":{"a":0,"k":0}},{"ty":"tr","p":{"a":0,"k":[0,0]},"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ip":0,"op":360,"st":0,"bm":0}],"markers":[]};
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const anim = lottie.loadAnimation({
+        container: coverContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: !reduceMotion.matches,
+        animationData: coverAnimationData,
+        rendererSettings: {
+          preserveAspectRatio: 'xMaxYMid slice',
+          progressiveLoad: false
+        }
+      });
+
+      if (reduceMotion.matches) {
+        anim.goToAndStop(90, true);
+      }
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const filterButtons = [...document.querySelectorAll('.filter-tab')];
+      const credentialItems = [...document.querySelectorAll('.credential-list [data-kind]')];
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+
+          filterButtons.forEach((item) => {
+            item.setAttribute('aria-pressed', String(item === button));
+          });
+
+          credentialItems.forEach((item) => {
+            item.hidden = filter !== 'all' && item.dataset.kind !== filter;
+          });
+        });
+      });
+
+      const copyButton = document.getElementById('copy-email');
+      copyButton.addEventListener('click', async () => {
+        const email = 'itzasifur@gmail.com';
+        try {
+          await navigator.clipboard.writeText(email);
+          copyButton.textContent = 'Copied';
+          copyButton.classList.add('copied');
+          window.setTimeout(() => {
+            copyButton.textContent = 'Copy email';
+            copyButton.classList.remove('copied');
+          }, 1500);
+        } catch (error) {
+          window.location.href = `mailto:${email}`;
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const heading = document.querySelector('.identity h1');
+      if (!heading) return;
+
+      const fullName = heading.textContent.trim();
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      if (reduceMotion.matches) return;
+
+      heading.textContent = '';
+      heading.classList.add('typing');
+
+      let position = 0;
+      const typeNextCharacter = () => {
+        if (position < fullName.length) {
+          heading.textContent += fullName.charAt(position);
+          position += 1;
+
+          // A slightly varied but steady rhythm makes the reveal feel less mechanical.
+          const nextDelay = /[ .]/.test(fullName.charAt(position - 1)) ? 115 : 52;
+          window.setTimeout(typeNextCharacter, nextDelay);
+        } else {
+          heading.classList.remove('typing');
+        }
+      };
+
+      window.setTimeout(typeNextCharacter, 320);
+    })();
+  </script>
+
+</body>
+</html>
